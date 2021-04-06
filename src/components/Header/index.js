@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useRouter } from 'next/router';
+import React from "react";
+import styled from "styled-components";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const router = useRouter();
@@ -12,47 +12,55 @@ const Header = () => {
           <nav>
             <ul>
               <li>
-                <a href="./" className={router.pathname == '/' ? 'active' : ''}>
+                <a href="./" className={router.pathname == "/" ? "active" : ""}>
                   Home
                 </a>
               </li>
               <li>
                 <a
-                  href="./quem-somos"
-                  className={router.pathname == '/quem-somos' ? 'active' : 'erro'}
+                  href="./quem-somos.html"
+                  className={
+                    router.pathname == "/quem-somos" ? "active" : "erro"
+                  }
                 >
                   Quem Somos
                 </a>
               </li>
               <li>
                 <a
-                  href="./area-de-atuacao"
-                  className={router.pathname == '/area-de-atuacao' ? 'active' : ''}
+                  href="./area-de-atuacao.html"
+                  className={
+                    router.pathname == "/area-de-atuacao" ? "active" : ""
+                  }
                 >
                   Área de Atuação
                 </a>
               </li>
               <li>
                 <a
-                  href="./cursos"
-                  className={router.pathname == '/cursos' ? 'active' : ''}
+                  href="./cursos.html"
+                  className={router.pathname == "/cursos" ? "active" : ""}
                 >
                   Cursos
                 </a>
               </li>
               <li>
                 <a
-                  href="./politicas-publicas"
-                  className={router.pathname == '/politicas-publicas' ? 'active' : ''}
+                  href="./politicas-publicas.html"
+                  className={
+                    router.pathname == "/politicas-publicas" ? "active" : ""
+                  }
                 >
                   Politica de Publicas
                 </a>
               </li>
               <li>
                 <a
-                  href="./programa-de-capacitacao"
+                  href="./programa-de-capacitacao.html"
                   className={
-                    router.pathname == '/programa-de-capacitacao' ? 'active' : ''
+                    router.pathname == "/programa-de-capacitacao"
+                      ? "active"
+                      : ""
                   }
                 >
                   Programa de capacitação
@@ -60,8 +68,8 @@ const Header = () => {
               </li>
               <li>
                 <a
-                  href="./contato"
-                  className={router.pathname == '/contato' ? 'active' : ''}
+                  href="./contato.html"
+                  className={router.pathname == "/contato" ? "active" : ""}
                 >
                   Contato
                 </a>
