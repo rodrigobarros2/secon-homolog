@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import Head from 'next/head';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import CardCourse from '../../components/CardCourse';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import Head from "next/head";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import CardCourse from "../../components/CardCourse";
 
-const Cursos = () => {
+const Cursos = ({ cursos }) => {
   const [modal, setModal] = useState(false);
   const [modalOnline, setModalOnline] = useState(false);
   const [modalOffline, setModalOffline] = useState(false);
@@ -20,24 +20,6 @@ const Cursos = () => {
     ? () => setModalOffline(true)
     : () => setModalOffline(false);
 
-  const [cursos, setCursos] = useState([]);
-
-  useEffect(() => {
-    async function loadApi() {
-      try {
-        const response = await fetch(
-          'http://desenvolvimento.pixelprime.com.br/cecon/api/v1/cursos'
-        );
-
-        const data = await response.json();
-        setCursos(data);
-      } catch (error) {
-        console.log('Não Encontrado');
-      }
-    }
-    loadApi();
-  }, []);
-
   return (
     <>
       <Head>
@@ -50,7 +32,11 @@ const Cursos = () => {
             <WrapperTitle>
               <h1>Conheça os cursos da Cecon</h1>
             </WrapperTitle>
-            <img src="./icons/header-cursos.png" alt="" className="baner-cursos" />
+            <img
+              src="./icons/header-cursos.png"
+              alt=""
+              className="baner-cursos"
+            />
           </div>
 
           <h2 className="como-funciona">Como funciona os cursos</h2>
@@ -74,11 +60,15 @@ const Cursos = () => {
           </WrapperCard>
 
           {!modal ? (
-            ''
+            ""
           ) : (
             <div>
               <WrapperImgCourse>
-                <img src="./icons/cozinhando.png" alt="" className="img-cozinhando" />
+                <img
+                  src="./icons/cozinhando.png"
+                  alt=""
+                  className="img-cozinhando"
+                />
               </WrapperImgCourse>
               <VantagensCulinaria>
                 <Vantagens>
@@ -103,24 +93,27 @@ const Cursos = () => {
                 <TextCulinaria>
                   <h3>Culinaria</h3>
                   <p>
-                    Lorem ipsum eleifend phasellus scelerisque senectus dui lacu s pretium
-                    leo, amet vivamus tristiqu per inceptos eros. varius lig ula vivamus
-                    iaculis accumsan donec pharetra pellentesque euismod au ctor, justo
-                    phasellus integer tincidunt ad at platea lacinia netus, v itae ipsum
-                    lorem nam nibh donec fames scelerisque. tincidunt etiam fusce molestie
-                    venenatis orci felis diam quis dictumst faucibus, tortor arcu mag na
-                    fringilla phasellus viverra mattis ante augue rhoncus fames, donec
-                    torqu ent molestie lacus etiam placerat fringilla sapien ac. Torquent
-                    sagittis tu rpis elit nibh odio
+                    Lorem ipsum eleifend phasellus scelerisque senectus dui lacu
+                    s pretium leo, amet vivamus tristiqu per inceptos eros.
+                    varius lig ula vivamus iaculis accumsan donec pharetra
+                    pellentesque euismod au ctor, justo phasellus integer
+                    tincidunt ad at platea lacinia netus, v itae ipsum lorem nam
+                    nibh donec fames scelerisque. tincidunt etiam fusce molestie
+                    venenatis orci felis diam quis dictumst faucibus, tortor
+                    arcu mag na fringilla phasellus viverra mattis ante augue
+                    rhoncus fames, donec torqu ent molestie lacus etiam placerat
+                    fringilla sapien ac. Torquent sagittis tu rpis elit nibh
+                    odio
                     <br />
                     <br />
                     <span />
                     {/* parágrafo */}
-                    purus habitasse pharetra, interdum accumsan etiam fames fringilla
-                    ultricies quam ligula, habitasse platea ipsum tempus class dictum sen
-                    ectus. fames nunc convallis donec class feugiat platea massa vivamus
-                    proin moll is, posuere amet consectetur vestibulum conubia scelerisque
-                    conubia convallis. vi posuere iaculis etiam sodales phasellus.
+                    purus habitasse pharetra, interdum accumsan etiam fames
+                    fringilla ultricies quam ligula, habitasse platea ipsum
+                    tempus class dictum sen ectus. fames nunc convallis donec
+                    class feugiat platea massa vivamus proin moll is, posuere
+                    amet consectetur vestibulum conubia scelerisque conubia
+                    convallis. vi posuere iaculis etiam sodales phasellus.
                   </p>
                 </TextCulinaria>
               </VantagensCulinaria>
@@ -145,35 +138,40 @@ const Cursos = () => {
                     )}
                   </section>
                   {!modalOnline ? (
-                    ''
+                    ""
                   ) : (
                     <>
                       <div>
                         <p>
-                          Lorem ipsum eleifend phasellus scelerisque senectus dui lacus
-                          pretium leo, amet vivamus tristiqu per inceptos eros. varius
-                          ligula vivamus iaculis accumsan donec pharetra pellentesque
-                          euismod auctor, justo phasellus integer tincidunt ad at platea
-                          lacinia netus, vitae ipsum lorem nam nibh donec fames
-                          scelerisque. tincidunt etiam fusce molestie venenatis orci felis
-                          diam quis dictumst faucibus, tortor arcu magna fringilla
-                          phasellus viverra mattis andonec torquent molestie lacus etiam
-                          placerat fringilla sapien ac. Torquent sagittis turpis elit nibh
+                          Lorem ipsum eleifend phasellus scelerisque senectus
+                          dui lacus pretium leo, amet vivamus tristiqu per
+                          inceptos eros. varius ligula vivamus iaculis accumsan
+                          donec pharetra pellentesque euismod auctor, justo
+                          phasellus integer tincidunt ad at platea lacinia
+                          netus, vitae ipsum lorem nam nibh donec fames
+                          scelerisque. tincidunt etiam fusce molestie venenatis
+                          orci felis diam quis dictumst faucibus, tortor arcu
+                          magna fringilla phasellus viverra mattis andonec
+                          torquent molestie lacus etiam placerat fringilla
+                          sapien ac. Torquent sagittis turpis elit nibh
                           <br />
                           <br />
-                          <span className="paragrafo" /> odio purus habitasse pharetra,
-                          interdum accumsan etiam fames fringilla ultricies quam ligula,
-                          habitasse platea ipsum tempus class dictum senectus. fames nunc
-                          convallis donec class feugiat platea massa vivamus proin mollis,
-                          posuere amet consectetur vestibulum conubia scelerisque conubia
-                          convallis. vivamus lacus ante libero eros nisi posuere
-                          vestibulum mi etiam eu, inceptos tincidunt libero hendrerit
-                          phasellus sociosqu vehicula duis sit curae, laoreet litora
-                          egestas tortor auctor elementum iaculis suscipit dui. molestie
-                          amet suscipit etiam in vehicula aliquam ornare ipsum proin velit
-                          platea, magna eleifend nec maecenas lobortis semper enim est
-                          pharetra habitasse pharetra, sed pulvinar eget nisi class
-                          posuere iaculis etiam sodales phasellus.
+                          <span className="paragrafo" /> odio purus habitasse
+                          pharetra, interdum accumsan etiam fames fringilla
+                          ultricies quam ligula, habitasse platea ipsum tempus
+                          class dictum senectus. fames nunc convallis donec
+                          class feugiat platea massa vivamus proin mollis,
+                          posuere amet consectetur vestibulum conubia
+                          scelerisque conubia convallis. vivamus lacus ante
+                          libero eros nisi posuere vestibulum mi etiam eu,
+                          inceptos tincidunt libero hendrerit phasellus sociosqu
+                          vehicula duis sit curae, laoreet litora egestas tortor
+                          auctor elementum iaculis suscipit dui. molestie amet
+                          suscipit etiam in vehicula aliquam ornare ipsum proin
+                          velit platea, magna eleifend nec maecenas lobortis
+                          semper enim est pharetra habitasse pharetra, sed
+                          pulvinar eget nisi class posuere iaculis etiam sodales
+                          phasellus.
                         </p>
                       </div>
                       <WrapperVantagemRodape>
@@ -185,11 +183,13 @@ const Cursos = () => {
                           <div className="container-text-vantagens">
                             <span>lorem impsum</span>
                             <p>
-                              Lorem ipsum eleifend phasellus scelerisque senectus dui
-                              lacus pretium leo, amet vivamus tristiqu per inceptos eros.
-                              varius ligula vivamus iaculis donec pharetra pellentesque
-                              euism phasellus integer platea lacinia netus, vitae ipsum
-                              loronec fames scelerisqu etiam sodales phasellus.
+                              Lorem ipsum eleifend phasellus scelerisque
+                              senectus dui lacus pretium leo, amet vivamus
+                              tristiqu per inceptos eros. varius ligula vivamus
+                              iaculis donec pharetra pellentesque euism
+                              phasellus integer platea lacinia netus, vitae
+                              ipsum loronec fames scelerisqu etiam sodales
+                              phasellus.
                             </p>
                           </div>
                         </section>
@@ -200,11 +200,13 @@ const Cursos = () => {
                           <div className="container-text-vantagens">
                             <span>lorem impsum</span>
                             <p>
-                              Lorem ipsum eleifend phasellus scelerisque senectus dui
-                              lacus pretium leo, amet vivamus tristiqu per inceptos eros.
-                              varius ligula vivamus iaculis donec pharetra pellentesque
-                              euism phasellus integer platea lacinia netus, vitae ipsum
-                              loronec fames scelerisqu etiam sodales phasellus.
+                              Lorem ipsum eleifend phasellus scelerisque
+                              senectus dui lacus pretium leo, amet vivamus
+                              tristiqu per inceptos eros. varius ligula vivamus
+                              iaculis donec pharetra pellentesque euism
+                              phasellus integer platea lacinia netus, vitae
+                              ipsum loronec fames scelerisqu etiam sodales
+                              phasellus.
                             </p>
                           </div>
                         </section>
@@ -215,11 +217,13 @@ const Cursos = () => {
                           <div className="container-text-vantagens">
                             <span>lorem impsum</span>
                             <p>
-                              Lorem ipsum eleifend phasellus scelerisque senectus dui
-                              lacus pretium leo, amet vivamus tristiqu per inceptos eros.
-                              varius ligula vivamus iaculis donec pharetra pellentesque
-                              euism phasellus integer platea lacinia netus, vitae ipsum
-                              loronec fames scelerisqu etiam sodales phasellus.
+                              Lorem ipsum eleifend phasellus scelerisque
+                              senectus dui lacus pretium leo, amet vivamus
+                              tristiqu per inceptos eros. varius ligula vivamus
+                              iaculis donec pharetra pellentesque euism
+                              phasellus integer platea lacinia netus, vitae
+                              ipsum loronec fames scelerisqu etiam sodales
+                              phasellus.
                             </p>
                           </div>
                         </section>
@@ -243,34 +247,38 @@ const Cursos = () => {
                   </section>
 
                   {!modalOffline ? (
-                    ''
+                    ""
                   ) : (
                     <>
                       <div>
                         <p>
-                          Lorem ipsum eleifend phasellus scelerisque senectus dui lacus
-                          pretium leo, amet vivamus tristiqu per inceptos eros. varius
-                          ligula vivamus iaculis accumsan donec pharetra pellentesque
-                          euismod auctor, justo phasellus integer tincidunt ad at platea
-                          lacinia netus, vitae ipsum lorem nam nibh donec fames
-                          scelerisque. tincidunt etiam fusce molestie venenatis orci felis
-                          diam quis dictumst faucibus, tortor arcu magna fringilla
-                          phasellus viverra mattis ante augue rhoncus fames, donec
-                          torquent molestie lacus etiam placerat fringilla sapien ac.
-                          Torquent sagittis turpis elit
+                          Lorem ipsum eleifend phasellus scelerisque senectus
+                          dui lacus pretium leo, amet vivamus tristiqu per
+                          inceptos eros. varius ligula vivamus iaculis accumsan
+                          donec pharetra pellentesque euismod auctor, justo
+                          phasellus integer tincidunt ad at platea lacinia
+                          netus, vitae ipsum lorem nam nibh donec fames
+                          scelerisque. tincidunt etiam fusce molestie venenatis
+                          orci felis diam quis dictumst faucibus, tortor arcu
+                          magna fringilla phasellus viverra mattis ante augue
+                          rhoncus fames, donec torquent molestie lacus etiam
+                          placerat fringilla sapien ac. Torquent sagittis turpis
+                          elit
                           <br />
                           <br />
                           <span className="paragrafo" />
-                          fringilla ultricies quam ligula, habitasse platea ipsum tempus
-                          class dictum senectus. fames nunc convallis donec class feugiat
-                          platea massa vivamus proin mollis, posuere amet consectetur
-                          vestibulum conubia scelerisque conubia convallis. vivamus lacus
-                          ante libero eros nisi posuere vestibulum mi etiam eu, inceptos
-                          tincidunt libero hendrerit phasellus sociosqu vehicula duis sit
-                          curae, laoreet litora egestas tortor auctor elementum iaculis
-                          suscipit dui. molestie amet suscipit etiam in vehicula aliquam
-                          ornare ipsum proin velit platea, magna eleifend nec maecenas
-                          lobortis semper enim est pharetra habitasse pharetra, sed
+                          fringilla ultricies quam ligula, habitasse platea
+                          ipsum tempus class dictum senectus. fames nunc
+                          convallis donec class feugiat platea massa vivamus
+                          proin mollis, posuere amet consectetur vestibulum
+                          conubia scelerisque conubia convallis. vivamus lacus
+                          ante libero eros nisi posuere vestibulum mi etiam eu,
+                          inceptos tincidunt libero hendrerit phasellus sociosqu
+                          vehicula duis sit curae, laoreet litora egestas tortor
+                          auctor elementum iaculis suscipit dui. molestie amet
+                          suscipit etiam in vehicula aliquam ornare ipsum proin
+                          velit platea, magna eleifend nec maecenas lobortis
+                          semper enim est pharetra habitasse pharetra, sed
                           pulvinar eget nisi class posuere iaculis etiam sodales
                           phasellus.
                         </p>
@@ -284,11 +292,13 @@ const Cursos = () => {
                           <div className="container-text-vantagens">
                             <span>lorem impsum</span>
                             <p>
-                              Lorem ipsum eleifend phasellus scelerisque senectus dui
-                              lacus pretium leo, amet vivamus tristiqu per inceptos eros.
-                              varius ligula vivamus iaculis donec pharetra pellentesque
-                              euism phasellus integer platea lacinia netus, vitae ipsum
-                              loronec fames scelerisqu etiam sodales phasellus.
+                              Lorem ipsum eleifend phasellus scelerisque
+                              senectus dui lacus pretium leo, amet vivamus
+                              tristiqu per inceptos eros. varius ligula vivamus
+                              iaculis donec pharetra pellentesque euism
+                              phasellus integer platea lacinia netus, vitae
+                              ipsum loronec fames scelerisqu etiam sodales
+                              phasellus.
                             </p>
                           </div>
                         </section>
@@ -299,11 +309,13 @@ const Cursos = () => {
                           <div className="container-text-vantagens">
                             <span>lorem impsum</span>
                             <p>
-                              Lorem ipsum eleifend phasellus scelerisque senectus dui
-                              lacus pretium leo, amet vivamus tristiqu per inceptos eros.
-                              varius ligula vivamus iaculis donec pharetra pellentesque
-                              euism phasellus integer platea lacinia netus, vitae ipsum
-                              loronec fames scelerisqu etiam sodales phasellus.
+                              Lorem ipsum eleifend phasellus scelerisque
+                              senectus dui lacus pretium leo, amet vivamus
+                              tristiqu per inceptos eros. varius ligula vivamus
+                              iaculis donec pharetra pellentesque euism
+                              phasellus integer platea lacinia netus, vitae
+                              ipsum loronec fames scelerisqu etiam sodales
+                              phasellus.
                             </p>
                           </div>
                         </section>
@@ -314,11 +326,13 @@ const Cursos = () => {
                           <div className="container-text-vantagens">
                             <span>lorem impsum</span>
                             <p>
-                              Lorem ipsum eleifend phasellus scelerisque senectus dui
-                              lacus pretium leo, amet vivamus tristiqu per inceptos eros.
-                              varius ligula vivamus iaculis donec pharetra pellentesque
-                              euism phasellus integer platea lacinia netus, vitae ipsum
-                              loronec fames scelerisqu etiam sodales phasellus.
+                              Lorem ipsum eleifend phasellus scelerisque
+                              senectus dui lacus pretium leo, amet vivamus
+                              tristiqu per inceptos eros. varius ligula vivamus
+                              iaculis donec pharetra pellentesque euism
+                              phasellus integer platea lacinia netus, vitae
+                              ipsum loronec fames scelerisqu etiam sodales
+                              phasellus.
                             </p>
                           </div>
                         </section>
@@ -336,10 +350,22 @@ const Cursos = () => {
   );
 };
 
+export async function getStaticProps() {
+  const resCursos = await fetch(
+    "http://desenvolvimento.pixelprime.com.br/cecon/api/v1/programa-capacitacao"
+  );
+
+  const cursos = await resCursos.json();
+
+  return {
+    props: { cursos },
+  };
+}
+
 export default Cursos;
 
 const Container = styled.div`
-  background: url('./icons/bg.png');
+  background: url("./icons/bg.png");
 `;
 
 const Wrapper = styled.div`

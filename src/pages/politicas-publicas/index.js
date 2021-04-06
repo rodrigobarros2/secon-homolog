@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import Head from 'next/head';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import CardPolitica from '../../components/CardPolitica';
+import React from "react";
+import styled from "styled-components";
+import Head from "next/head";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import CardPolitica from "../../components/CardPolitica";
 
 const PoliticasPublica = () => (
   <>
@@ -21,12 +21,13 @@ const PoliticasPublica = () => (
             <h1>Políticas Públicas</h1>
           </div>
           <p>
-            As ações de implementação do SUAS – Sistema Único de Assistência Social
-            objetivam apoiar o município na estruturação e aprimoramento da oferta e
-            atendimento da Política de Assistência Social. Este apoio operacional vem
-            fortalecer a Gestão do SUAS no município,ampliando o atendimento da população
-            e qualificando a atenção ofertada, por meio de ações planejadas e organizadas
-            de acordo com as diretrizes do SUAS.
+            As ações de implementação do SUAS – Sistema Único de Assistência
+            Social objetivam apoiar o município na estruturação e aprimoramento
+            da oferta e atendimento da Política de Assistência Social. Este
+            apoio operacional vem fortalecer a Gestão do SUAS no
+            município,ampliando o atendimento da população e qualificando a
+            atenção ofertada, por meio de ações planejadas e organizadas de
+            acordo com as diretrizes do SUAS.
           </p>
         </WrapperMain>
         <WrapperCard>
@@ -73,10 +74,22 @@ const PoliticasPublica = () => (
   </>
 );
 
+export async function getStaticProps() {
+  const resPoliticasPublicas = await fetch(
+    "http://desenvolvimento.pixelprime.com.br/cecon/api/v1/programa-capacitacao"
+  );
+
+  const programacapacitacao = await resPoliticasPublicas.json();
+
+  return {
+    props: { programacapacitacao },
+  };
+}
+
 export default PoliticasPublica;
 
 const Container = styled.div`
-  background: url('./icons/bg.png');
+  background: url("./icons/bg.png");
 `;
 
 const Wrapper = styled.div`

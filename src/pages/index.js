@@ -8,39 +8,7 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import Footer from "../components/Footer";
 
-export default function App({ posts }) {
-  const [apiCarrousel, setapiCarrousel] = useState([]);
-  const [apiHome, setApiHome] = useState([]);
-  const [postEmail, setPostEmail] = useState([]);
-
-  useEffect(() => {
-    async function loadApi() {
-      try {
-        const responseCarrousel = await fetch(
-          "http://www.desenvolvimento.pixelprime.com.br/cecon/api/v1/slide"
-        );
-        const responseHome = await fetch(
-          "http://desenvolvimento.pixelprime.com.br/cecon/api/v1/home"
-        );
-        const responsePostCadastro = await fetch(
-          "http://desenvolvimento.pixelprime.com.br/cecon/api/v1/contato"
-        );
-
-        const dataCarrousel = await responseCarrousel.json();
-        setapiCarrousel(dataCarrousel);
-
-        const dataHome = await responseHome.json();
-        setApiHome(dataHome);
-
-        const postCadastro = await responsePostCadastro.json();
-        setPostEmail(postCadastro);
-      } catch (error) {
-        console.log("Não Encontrado");
-      }
-    }
-    loadApi();
-  }, []);
-
+export default function App({ apiCarrousel, apiHome }) {
   return (
     <>
       <Head>
@@ -62,21 +30,16 @@ export default function App({ posts }) {
               dynamicHeight
               swipeable
             >
-              {apiCarrousel.map((i) => (
-                <div key={i.id}>
-                  <img src={i.image} alt="Imagem Carrousel" />
-                  <h1>{i.title}</h1>
-                  <h3>{i.button}</h3>
+              {apiCarrousel.map((post) => (
+                <div key={post.id}>
+                  <img src={post.image} alt="Imagem Carrousel" />
+                  <h1>{post.title}</h1>
+                  <h3>{post.button}</h3>
                 </div>
               ))}
             </Carousel>
           </WrapperCarousel>
           <WrapperStory>
-            {posts.map((post) => (
-              <div key={post.id}>
-                <li>{post.title}</li>
-              </div>
-            ))}
             <h2>{apiHome.home_conheca_mais}</h2>
             <img src="./icons/predio.png" alt="Imagem Predio" />
             <div>
@@ -141,14 +104,20 @@ export default function App({ posts }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch(
+  const resCarousel = await fetch(
     "https://www.desenvolvimento.pixelprime.com.br/cecon/api/v1/slide"
   );
-  const posts = await res.json();
+  const resHome = await fetch(
+    "http://desenvolvimento.pixelprime.com.br/cecon/api/v1/home"
+  );
+
+  const apiCarrousel = await resCarousel.json();
+  const apiHome = await resHome.json();
 
   return {
     props: {
-      posts,
+      apiCarrousel,
+      apiHome,
     },
   };
 }

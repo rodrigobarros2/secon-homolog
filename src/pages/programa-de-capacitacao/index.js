@@ -1,28 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import Head from 'next/head';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import Head from "next/head";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
-const ProgramaDeCapacitacao = () => {
-  const [programacapacitacao, setProgramaCapacitacao] = useState([]);
-
-  useEffect(() => {
-    async function loadApi() {
-      try {
-        const response = await fetch(
-          'http://desenvolvimento.pixelprime.com.br/cecon/api/v1/programa-capacitacao'
-        );
-
-        const data = await response.json();
-        setProgramaCapacitacao(data);
-      } catch (error) {
-        console.log('Não Encontrado');
-      }
-    }
-    loadApi();
-  }, []);
-
+const ProgramaDeCapacitacao = ({ programacapacitacao }) => {
   return (
     <>
       <Head>
@@ -53,7 +35,9 @@ const ProgramaDeCapacitacao = () => {
                   <img src="./icons/assistencia-social-black.svg" alt="" />
                 </div>
                 <h4>AssistenteSocial</h4>
-                <p>{programacapacitacao.programa_capacitacao_assistencia_social}</p>
+                <p>
+                  {programacapacitacao.programa_capacitacao_assistencia_social}
+                </p>
               </li>
               <li>
                 <div className="img-graduation">
@@ -84,11 +68,24 @@ const ProgramaDeCapacitacao = () => {
     </>
   );
 };
+
+export async function getStaticProps() {
+  const resProgramaCapacitacao = await fetch(
+    "http://desenvolvimento.pixelprime.com.br/cecon/api/v1/programa-capacitacao"
+  );
+
+  const programacapacitacao = await resProgramaCapacitacao.json();
+
+  return {
+    props: { programacapacitacao },
+  };
+}
+
 export default ProgramaDeCapacitacao;
 
 const Container = styled.div`
   height: 100%;
-  background: url('./icons/bg.png');
+  background: url("./icons/bg.png");
 `;
 
 const Wrapper = styled.div`

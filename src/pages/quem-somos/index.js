@@ -1,30 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import Head from 'next/head';
-import Link from 'next/link';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import Teachers from '../../components/Teachers';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Head from "next/head";
+import Link from "next/link";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Teachers from "../../components/Teachers";
 
-const QuemSomos = () => {
-  const [quemSomos, setQuemSomos] = useState([]);
-
-  useEffect(() => {
-    async function loadApi() {
-      try {
-        const response = await fetch(
-          'http://desenvolvimento.pixelprime.com.br/cecon/api/v1/quem-somos'
-        );
-
-        const dataQuemSomos = await response.json();
-        setQuemSomos(dataQuemSomos);
-      } catch (error) {
-        console.log('Não Encontrado');
-      }
-    }
-    loadApi();
-  }, []);
-
+const QuemSomos = ({ quemSomos }) => {
   return (
     <>
       <Head>
@@ -37,10 +19,10 @@ const QuemSomos = () => {
             <section>
               <h1>{quemSomos.titulo}</h1>
               <p>
-                Lorem ipsum eleifend phasellus scelerisque senectus dui lacus pretium leo,
-                amet vivamus tristique platea a aptent magna donec, condimentum facilisis
-                ipsum laoreet aliquet mattis quisque tellus. enim nisl habitant porttitor
-                conubia tortor quis lacus
+                Lorem ipsum eleifend phasellus scelerisque senectus dui lacus
+                pretium leo, amet vivamus tristique platea a aptent magna donec,
+                condimentum facilisis ipsum laoreet aliquet mattis quisque
+                tellus. enim nisl habitant porttitor conubia tortor quis lacus
               </p>
             </section>
             <div>
@@ -57,9 +39,9 @@ const QuemSomos = () => {
           <Abboutemployees>
             <h1>{quemSomos.quem_somos_equipe_professor}</h1>
             <p>
-              Lorem ipsum eleifend phasellus scelerisque senectus dui lacus pretium leo,
-              amet vivamus tristique platea a aptent magna done facilisis ipsum laoreet
-              aliquet mattis quisque tellus.
+              Lorem ipsum eleifend phasellus scelerisque senectus dui lacus
+              pretium leo, amet vivamus tristique platea a aptent magna done
+              facilisis ipsum laoreet aliquet mattis quisque tellus.
             </p>
           </Abboutemployees>
           <Employees>
@@ -104,10 +86,23 @@ const QuemSomos = () => {
     </>
   );
 };
+
+export async function getStaticProps() {
+  const resQuemSomos = await fetch(
+    "https://www.desenvolvimento.pixelprime.com.br/cecon/api/v1/quem-somos"
+  );
+
+  const quemSomos = await resQuemSomos.json();
+
+  return {
+    props: { quemSomos },
+  };
+}
+
 export default QuemSomos;
 
 const Container = styled.div`
-  background: url('./icons/bg.png');
+  background: url("./icons/bg.png");
 `;
 
 const Wrapper = styled.div`

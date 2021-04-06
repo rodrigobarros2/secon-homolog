@@ -1,28 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import Head from 'next/head';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Head from "next/head";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
-const Cursos = () => {
-  const [areaatuacao, setAreaAtuacao] = useState([]);
-
-  useEffect(() => {
-    async function loadApi() {
-      try {
-        const response = await fetch(
-          'http://desenvolvimento.pixelprime.com.br/cecon/api/v1/area-atuacao'
-        );
-
-        const data = await response.json();
-        setAreaAtuacao(data);
-      } catch (error) {
-        console.log('Não Encontrado');
-      }
-    }
-    loadApi();
-  }, []);
-
+const Cursos = ({ areaatuacao }) => {
   return (
     <>
       <Head>
@@ -49,10 +31,22 @@ const Cursos = () => {
   );
 };
 
+export async function getStaticProps() {
+  const resAreaAtuacao = await fetch(
+    "http://desenvolvimento.pixelprime.com.br/cecon/api/v1/area-atuacao"
+  );
+
+  const areaatuacao = await resAreaAtuacao.json();
+
+  return {
+    props: { areaatuacao },
+  };
+}
+
 export default Cursos;
 
 const Container = styled.div`
-  background: url('./icons/bg.png');
+  background: url("./icons/bg.png");
   height: 100%;
 `;
 
