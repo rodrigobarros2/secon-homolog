@@ -8,7 +8,7 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import Footer from "../components/Footer";
 
-export default function App() {
+export default function App({ posts }) {
   const [apiCarrousel, setapiCarrousel] = useState([]);
   const [apiHome, setApiHome] = useState([]);
   const [postEmail, setPostEmail] = useState([]);
@@ -72,6 +72,11 @@ export default function App() {
             </Carousel>
           </WrapperCarousel>
           <WrapperStory>
+            {posts.map((post) => (
+              <div key={post.id}>
+                <li>{post.title}</li>
+              </div>
+            ))}
             <h2>{apiHome.home_conheca_mais}</h2>
             <img src="./icons/predio.png" alt="Imagem Predio" />
             <div>
@@ -133,6 +138,19 @@ export default function App() {
       </Container>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const res = await fetch(
+    "https://www.desenvolvimento.pixelprime.com.br/cecon/api/v1/slide"
+  );
+  const posts = await res.json();
+
+  return {
+    props: {
+      posts,
+    },
+  };
 }
 
 const Container = styled.div`
